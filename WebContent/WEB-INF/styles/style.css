@@ -1,0 +1,31 @@
+html, body
+{
+	height: 100%;
+	width: 100%;
+}
+
+.container
+{
+	margin: auto;
+	text-align: center;
+	width:22%;
+	border: 1px solid #286090;
+	border-radius: 5px;
+}
+
+.home-page-title
+{
+	font: 30px "Candara", "Arial", sans-serif;
+}
+
+.home-page-description
+{
+	font-family: "Tahoma", "Arial", sans-serif;
+	font-style: italic;
+	font-size: small;
+}
+
+.error-message
+{
+	color: red;
+}
