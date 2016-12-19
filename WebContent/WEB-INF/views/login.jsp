@@ -17,18 +17,7 @@
 <!-- TODO: Fix the navbar -->
 <nav class="navbar navbar-light bg-faded">
 <ul class="nav navbad-nav">
-	<li class= "nav-item">
-	<a class="nav-link" href="#"></a>
-	</li>
-	<li class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle" href="http://example.com" id="supportedContentDropdown"> </a>
-		<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
-			<a class="dropdown-item" href="#">Create List</a>
-			<a class="dropdown-item" href="#">My Lists</a>
-			<a class="dropdown-item" href="#">Preferences</a>
-		</div>
-	
-	</li>
+
 </ul>
 </nav>
 
