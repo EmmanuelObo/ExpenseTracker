@@ -24,8 +24,7 @@ public class EditListController
 	}
 	
 	@RequestMapping(value="/edit-list", method=RequestMethod.POST)
-	public ExpenseList edittingList( 
-			HttpServletRequest request)
+	public ExpenseList edittingList(HttpServletRequest request)
 	{
 		ApplicationContext context = (ApplicationContext) request.getServletContext().getAttribute("context");
 		User sessionUser = (User) request.getServletContext().getAttribute("user");
