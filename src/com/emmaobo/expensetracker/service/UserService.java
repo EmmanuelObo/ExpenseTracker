@@ -164,4 +164,22 @@ public class UserService implements CentralService<User>{
 		}
 		return false;
 	}
+	
+	public ExpenseList retrieveList(Long userID, Long listID)
+	{
+		em = emf.createEntityManager();
+		et = em.getTransaction();
+		
+		ExpenseList selectedList = em.find(ExpenseList.class, listID);
+		
+		if(selectedList == null)
+			return null;
+		
+		if(selectedList.getOwner().getId() == userID)
+		{
+			return selectedList;
+		}
+		
+		return null;
+	}
 }

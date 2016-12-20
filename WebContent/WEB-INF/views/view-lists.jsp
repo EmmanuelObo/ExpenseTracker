@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="js/jquery.js"></script>
+<script src="js/edit-list.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title> ${user.username }'s Lists</title>
 </head>
@@ -22,7 +24,8 @@
 <input type="submit" value="Remove">
 </form>
 
-<form action="edit-list" method="POST">
+<form id="edittor" action="edit-list" method="POST">
+<input type="hidden" value="${currentlist.id}" name="listID">
 <input type="hidden" value="${currentlist.title}" name="listTitle">
 <input type="submit" value="Edit">
 </form>
