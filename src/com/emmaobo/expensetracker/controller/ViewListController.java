@@ -32,7 +32,7 @@ public class ViewListController
 //		Long expid = Long.parseLong(id);
 		ApplicationContext context = (ApplicationContext) request.getServletContext().getAttribute("context");
 		User sessionUser = (User) request.getServletContext().getAttribute("user");
-		GetListCommand cmd = new GetListCommand((EntityManagerFactory)context.getBean("emf"), sessionUser,103L);
+		GetListCommand cmd = new GetListCommand((EntityManagerFactory)context.getBean("emf"), sessionUser,104L);
 		
 		ExpenseList newList = cmd.execute();
 		
