@@ -30,8 +30,8 @@
 
 <form id="list-viewer${count}" class="form-view-list" action="view-list" method="POST">
 <input type="hidden" id="list-id" value="${currentlist.id}" name="listID">
-<input type="hidden" value="${currentlist.title}" name="listTitle">
-<input type="hidden" value="${currentlist.total}" name="listTotal">
+<input type="hidden" id="list-title" value="${currentlist.title}" name="listTitle">
+<input type="hidden" id="list-total" value="${currentlist.total}" name="listTotal">
 <input type="submit" value="View">
 </form>
 

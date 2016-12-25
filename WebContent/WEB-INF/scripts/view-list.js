@@ -2,7 +2,7 @@ $(function(){
 $(".form-view-list").each(function(){
 	$(this).on("submit", function(e){
 	e.preventDefault();
-	var json = {"id": $('#list-id').val(), "title": "Testing", "total":null, "owner":null, "items": null};
+	var json = {"id": $('#list-id').val(), "title": $('#list-title').val(), "total":$('#list-total').val(), "owner":null, "items": null};
 	$.ajax({
 		type: "POST",
 		url: "http://localhost:8080/ExpenseTracker/view-list?",

@@ -32,6 +32,4 @@ public class CreateListCommand implements CentralCommand<ExpenseList>{
 		myService.addNewList(sessionUser, sessionUser.getId(), newList);
 		return newList;
 	}
-
-
 }

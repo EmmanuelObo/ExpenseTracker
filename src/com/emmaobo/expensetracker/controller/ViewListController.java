@@ -29,7 +29,6 @@ public class ViewListController
 			@RequestBody String id)
 	{
 		System.out.println(id);
-//		Long expid = Long.parseLong(id);
 		ApplicationContext context = (ApplicationContext) request.getServletContext().getAttribute("context");
 		User sessionUser = (User) request.getServletContext().getAttribute("user");
 		GetListCommand cmd = new GetListCommand((EntityManagerFactory)context.getBean("emf"), sessionUser,104L);
