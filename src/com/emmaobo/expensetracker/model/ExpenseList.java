@@ -1,6 +1,7 @@
 package com.emmaobo.expensetracker.model;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -32,6 +33,8 @@ public class ExpenseList
 	@OneToMany(targetEntity = Item.class, mappedBy="list")
 	private List<Item> items;
 	
+	private String dateCreated;
+	
 	public ExpenseList(){}
 	
 	public ExpenseList(String title)
@@ -48,14 +51,23 @@ public class ExpenseList
 	}
 
 	public BigDecimal getTotal() {
+		if(items != null && items.size() > 0)
+		{
+			for(Item item : items)
+			{
+				total = total.add(item.getCost());
+			}
+		}
 		return total;
 	}
 
 	public void setTotal(BigDecimal total) {
+	
 		this.total = total;
 	}
 
 	public List<Item> getItems() {
+		Collections.sort(items);
 		return items;
 	}
 
@@ -77,5 +89,23 @@ public class ExpenseList
 
 	public void setOwner(User owner) {
 		this.owner = owner;
+	}
+
+	public String getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(String dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+	
+	public int listSize()
+	{
+		return items.size();
+	}
+	
+	public void addItem(Item item)
+	{
+		items.add(item);
 	}
 }

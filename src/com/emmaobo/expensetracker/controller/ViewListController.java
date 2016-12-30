@@ -1,44 +1,38 @@
 package com.emmaobo.expensetracker.controller;
 
-import javax.persistence.EntityManagerFactory;
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.emmaobo.expensetracker.command.GetListCommand;
 import com.emmaobo.expensetracker.model.ExpenseList;
-import com.emmaobo.expensetracker.model.User;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class ViewListController 
 {
 
 	@RequestMapping("/view-list")
-	public ExpenseList edittedList(@RequestParam(value="listTitle")String title)
+	public ExpenseList viewList(@RequestParam(value="listTitle")String title)
 	{
 		return new ExpenseList(title);
 	}
 	
 	@RequestMapping(value="/view-list", method=RequestMethod.POST)
-	public ExpenseList edittingList(HttpServletRequest request, 
-			@RequestBody String id)
+	public ExpenseList viewSelectedList(HttpServletRequest request, 
+			@RequestBody String json) throws JsonParseException, JsonMappingException, IOException
 	{
-		System.out.println(id);
-		ApplicationContext context = (ApplicationContext) request.getServletContext().getAttribute("context");
-		User sessionUser = (User) request.getServletContext().getAttribute("user");
-		GetListCommand cmd = new GetListCommand((EntityManagerFactory)context.getBean("emf"), sessionUser,104L);
-		
-		ExpenseList newList = cmd.execute();
-		
-		newList.setOwner(null);
-		newList.setItems(null);
-		
-		return newList;
+		ObjectMapper mapper = new ObjectMapper();
+		ExpenseList list = mapper.readValue(json, ExpenseList.class);
+			
+		return list;
 	}
 }
 

@@ -157,6 +157,10 @@ public class UserService implements CentralService<User>{
 		if(selectedList.getOwner().getId() == userID)
 		{
 			et.begin();
+			if(selectedList.getItems().size() > 0 || selectedList.getItems() != null)
+			{
+				selectedList.setItems(null);
+			}
 			em.remove(selectedList);
 			et.commit();
 			em.close();

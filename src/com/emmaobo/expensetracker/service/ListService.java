@@ -8,6 +8,7 @@ import javax.persistence.EntityTransaction;
 
 import com.emmaobo.expensetracker.interfaces.CentralService;
 import com.emmaobo.expensetracker.model.ExpenseList;
+import com.emmaobo.expensetracker.model.Item;
 
 public class ListService implements CentralService<ExpenseList> {
 
@@ -28,8 +29,14 @@ public class ListService implements CentralService<ExpenseList> {
 
 	@Override
 	public List<ExpenseList> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		em = emf.createEntityManager();
+		et = em.getTransaction();
+		
+		et.begin();
+		
+		List<ExpenseList> lists = em.createQuery("SELECT expli FROM ExpenseList expli", ExpenseList.class).getResultList();
+		
+		return lists;
 	}
 
 	@Override
@@ -48,16 +55,38 @@ public class ListService implements CentralService<ExpenseList> {
 		
 		return entity;
 	}
+	
+	public boolean addNewItem(Long listID, ExpenseList updatedList, Item item)
+	{
+		em = emf.createEntityManager();
+		et = em.getTransaction();
+		
+		ItemService itemService = new ItemService(emf);
+		
+		itemService.write(item);
+		
+		et.begin();
+		
+		ExpenseList dbList = em.find(ExpenseList.class, listID);
+		
+		if(dbList != null)
+		{
+			dbList = updatedList;
+			em.merge(dbList);
+			et.commit();
+			em.close();
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public boolean delete(Long id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean update(ExpenseList updatedEntity, Long id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

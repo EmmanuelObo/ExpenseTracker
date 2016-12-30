@@ -1,6 +1,9 @@
 package com.emmaobo.expensetracker.command;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -14,6 +17,8 @@ public class CreateListCommand implements CentralCommand<ExpenseList>{
 	private UserService myService;
 	private ExpenseList newList;
 	private User sessionUser;
+	private DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY @ hh:mm a");
+	private Date today = new Date();
 	
 	public CreateListCommand(EntityManagerFactory emf, ExpenseList newList, User currentUser) 
 	{
@@ -22,6 +27,7 @@ public class CreateListCommand implements CentralCommand<ExpenseList>{
 		this.sessionUser = currentUser;
 		this.newList.setOwner(sessionUser);
 		this.newList.setTotal(new BigDecimal("0"));
+		this.newList.setDateCreated(dateFormat.format(today));
 	}
 
 

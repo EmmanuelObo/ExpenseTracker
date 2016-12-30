@@ -28,22 +28,24 @@
 <input type="submit" value="Remove">
 </form>
 
+<form action="edit-list" method="POST">
+<input type="hidden" value="${currentlist.id}" name="listID">
+<input type="submit" value="Edit">
+</form>
+
 <form id="list-viewer${count}" class="form-view-list" action="view-list" method="POST">
 <input type="hidden" id="list-id" value="${currentlist.id}" name="listID">
 <input type="hidden" id="list-title" value="${currentlist.title}" name="listTitle">
 <input type="hidden" id="list-total" value="${currentlist.total}" name="listTotal">
+<input type="hidden" id="date-created" value="${currentlist.dateCreated }" name="dateCreated">
+<input type="hidden" id="list-owner" value="${user.username}" name="listOwner">
 <input type="submit" value="View">
 </form>
 
 <div class="modal fade bd-example-modal-sm" id="view-list-modal" tabindex="-1" role ="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-sm">
 <div class="modal-content" style="text-align: center">
-<h1> ${currentlist.title} </h1>
-<p> Total: ${currentlist.total } </p>
-<p> Items: ${currentlist.items } </p>
-<p> Owner: ${currentlist.owner.username } </p>
-<button>Edit</button> 
-<button>Discard</button>
+
 </div>
 </div>
 </div>

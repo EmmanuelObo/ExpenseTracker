@@ -19,7 +19,7 @@ import com.emmaobo.expensetracker.enumeration.Status;
 
 @Entity
 @Table(name="ITEM")
-public class Item 
+public class Item implements Comparable<Item>
 {
 	@Id @GeneratedValue
 	private Long id;
@@ -117,6 +117,27 @@ public class Item
 
 	public void setList(ExpenseList list) {
 		this.list = list;
+	}
+
+	@Override
+	public int compareTo(Item o) {
+		if(this.priority == o.priority)
+			return 0;
+		
+		if(this.priority == Priority.HIGH && o.priority != Priority.HIGH)
+			return -1;
+		
+		if(this.priority == Priority.LOW && (o.priority == Priority.HIGH ||
+				o.priority == Priority.MEDIUM))
+			return 1;
+		
+		if(this.priority == Priority.MEDIUM && o.priority == Priority.HIGH)
+			return 1;
+		
+		if(this.priority == Priority.MEDIUM && o.priority == Priority.LOW)
+			return -1;
+		
+		return 0;
 	}
 
 }

@@ -13,8 +13,6 @@ import org.junit.Test;
 import com.emmaobo.expensetracker.enumeration.Priority;
 import com.emmaobo.expensetracker.model.ExpenseList;
 import com.emmaobo.expensetracker.model.Item;
-import com.emmaobo.expensetracker.service.ItemService;
-import com.emmaobo.expensetracker.service.ListService;
 
 public class ListServiceTest {
 	
@@ -32,7 +30,7 @@ public class ListServiceTest {
 		items = new ArrayList<Item>();
 		testItem1 = new Item("First Test Item", new BigDecimal("10.99"));
 		
-		testItem2 = new Item("Second Test Item", new BigDecimal("1.99"), Priority.HIGH);
+		testItem2 = new Item("Guest Created Item", new BigDecimal("19.99"), Priority.LOW);
 
 		items.add(testItem1);
 		items.add(testItem2);
@@ -53,6 +51,22 @@ public class ListServiceTest {
 		itemDAO.write(testItem1);
 		itemDAO.write(testItem2);
 		testDAO.write(testList);
+	}
+	
+	@Test
+	public void testAddItemToList()
+	{
+		List<ExpenseList> allLists = testDAO.readAll();
+		
+		for(ExpenseList list : allLists)
+		{
+			if(list.getId() == 120L)
+			{
+				testItem2.setList(list);
+				list.addItem(testItem2);
+				testDAO.addNewItem(list.getId(), list, testItem2);
+			}
+		}
 	}
 	
 	@Test
