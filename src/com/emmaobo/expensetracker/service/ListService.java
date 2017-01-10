@@ -8,7 +8,6 @@ import javax.persistence.EntityTransaction;
 
 import com.emmaobo.expensetracker.interfaces.CentralService;
 import com.emmaobo.expensetracker.model.ExpenseList;
-import com.emmaobo.expensetracker.model.Item;
 
 public class ListService implements CentralService<ExpenseList> {
 
@@ -22,7 +21,7 @@ public class ListService implements CentralService<ExpenseList> {
 	}
 	
 	@Override
-	public ExpenseList read(ExpenseList list)
+	public ExpenseList read(Long id)
 	{	
 		return null;
 	}
@@ -52,32 +51,12 @@ public class ListService implements CentralService<ExpenseList> {
 		et.commit();
 		em.close();
 		}
-		
 		return entity;
 	}
 	
-	public boolean addNewItem(Long listID, ExpenseList updatedList, Item item)
+	public boolean saveListChanges(Long listID, ExpenseList updatedList)
 	{
-		em = emf.createEntityManager();
-		et = em.getTransaction();
-		
-		ItemService itemService = new ItemService(emf);
-		
-		itemService.write(item);
-		
-		et.begin();
-		
-		ExpenseList dbList = em.find(ExpenseList.class, listID);
-		
-		if(dbList != null)
-		{
-			dbList = updatedList;
-			em.merge(dbList);
-			et.commit();
-			em.close();
-			return true;
-		}
-		return false;
+		return update(updatedList, listID);
 	}
 
 	@Override
@@ -86,7 +65,21 @@ public class ListService implements CentralService<ExpenseList> {
 	}
 
 	@Override
-	public boolean update(ExpenseList updatedEntity, Long id) {
+	public boolean update(ExpenseList updatedList, Long id) {
+		em = emf.createEntityManager();
+		et = em.getTransaction();
+		
+		ExpenseList dbList = em.find(ExpenseList.class, id);
+		
+		if(dbList != null)
+		{
+			et.begin();
+			em.merge(updatedList);
+			et.commit();
+			em.close();
+			return true;
+		}
+		
 		return false;
 	}
 }

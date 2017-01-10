@@ -22,9 +22,12 @@ public class ItemService implements CentralService<Item> {
 	}
 	
 	@Override
-	public Item read(Item item) 
+	public Item read(Long id) 
 	{
-		return null;
+		em = emf.createEntityManager();
+		et = em.getTransaction();
+		
+		return em.find(Item.class, id);
 	}
 
 	@Override
@@ -65,14 +68,12 @@ public class ItemService implements CentralService<Item> {
 			em.close();
 			return true;
 		}
-		System.out.println("Could not find Item in DB");
 		return false;
 	}
 
 	@Override
 	public boolean update(Item updatedItem, Long id) 
 	{
-		//TODO test this method; Might need to make changes
 		em = emf.createEntityManager();
 		et = em.getTransaction();
 		Item dbItem = em.find(Item.class, id);
@@ -85,8 +86,29 @@ public class ItemService implements CentralService<Item> {
 			em.close();
 			return true;
 		}
-		System.out.println("Could not find Item in DB");
 		return false;
 	}
-
+	
+	public boolean removeItem(Long itemID)
+	{
+		em = emf.createEntityManager();
+		et = em.getTransaction();
+		
+		Item dbItem = em.find(Item.class, itemID);
+		
+		if(dbItem != null)
+		{
+			et.begin();
+			em.remove(dbItem);
+			et.commit();
+			em.close();
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean addItem(Item item)
+	{
+		return write(item) == null ? true : false;
+	}
 }

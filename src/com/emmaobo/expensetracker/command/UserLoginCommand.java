@@ -20,7 +20,7 @@ public class UserLoginCommand implements CentralCommand<User>
 	@Override
 	public User execute()
 	{
-		User verifiedUser = myService.read(user);
+		User verifiedUser = myService.retrieveUser(user);
 		return verifiedUser;
 	}
 	

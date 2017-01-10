@@ -41,7 +41,7 @@ public class UserServiceTest {
 	@Test
 	public void testRead() 
 	{
-		User resultUser = testDAO.read(testUser);
+		User resultUser = testDAO.retrieveUser(testUser);
 		assertNotNull(resultUser);
 		assertTrue(resultUser instanceof User);
 		

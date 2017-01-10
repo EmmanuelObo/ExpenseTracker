@@ -35,10 +35,14 @@ public class ExpenseList
 	
 	private String dateCreated;
 	
-	public ExpenseList(){}
+	public ExpenseList()
+	{
+		this.total = new BigDecimal("0");
+	}
 	
 	public ExpenseList(String title)
 	{
+		super();
 		this.title = title;
 	}
 
@@ -108,4 +112,11 @@ public class ExpenseList
 	{
 		items.add(item);
 	}
+	
+	public void removeItem(Item item)
+	{
+		items.remove(item);
+	}
+	
+	
 }

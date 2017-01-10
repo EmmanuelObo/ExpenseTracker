@@ -23,7 +23,7 @@ public class GuestLoginCommand implements CentralCommand<User>{
 	@Override
 	public User execute() 
 	{
-		User verifiedGuestUser = myService.read(guest);
+		User verifiedGuestUser = myService.retrieveUser(guest);
 		return verifiedGuestUser;
 	}
 

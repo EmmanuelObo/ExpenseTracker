@@ -54,22 +54,6 @@ public class ListServiceTest {
 	}
 	
 	@Test
-	public void testAddItemToList()
-	{
-		List<ExpenseList> allLists = testDAO.readAll();
-		
-		for(ExpenseList list : allLists)
-		{
-			if(list.getId() == 120L)
-			{
-				testItem2.setList(list);
-				list.addItem(testItem2);
-				testDAO.addNewItem(list.getId(), list, testItem2);
-			}
-		}
-	}
-	
-	@Test
 	public void testRead()
 	{
 	}

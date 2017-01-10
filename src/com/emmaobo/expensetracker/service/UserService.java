@@ -24,8 +24,7 @@ public class UserService implements CentralService<User>{
 		this.emf = emf;
 	}
 
-	@Override
-	public User read(User user) {
+	public User retrieveUser(User user) {
 		em = emf.createEntityManager();
 		et = em.getTransaction();
 		
@@ -184,6 +183,11 @@ public class UserService implements CentralService<User>{
 			return selectedList;
 		}
 		
+		return null;
+	}
+
+	@Override
+	public User read(Long id) {
 		return null;
 	}
 }

@@ -5,17 +5,17 @@ import javax.persistence.EntityManagerFactory;
 import com.emmaobo.expensetracker.interfaces.CentralCommand;
 import com.emmaobo.expensetracker.model.ExpenseList;
 import com.emmaobo.expensetracker.model.Item;
-import com.emmaobo.expensetracker.service.ListService;
+import com.emmaobo.expensetracker.service.ItemService;
 
 public class AddItemCommand implements CentralCommand<Boolean>{
 	
-	private ListService myService;
+	private ItemService myService;
 	private Item item;
 	private ExpenseList currentList;
 	
 	public AddItemCommand(EntityManagerFactory emf, Item item, ExpenseList currentList)
 	{
-		this.myService = new ListService(emf);
+		this.myService = new ItemService(emf);
 		this.item = item;
 		this.currentList = currentList;
 	}
@@ -25,7 +25,7 @@ public class AddItemCommand implements CentralCommand<Boolean>{
 	{
 		item.setList(currentList);
 		currentList.addItem(item);
-		return myService.addNewItem(currentList.getId(), currentList, item);
+		return myService.addItem(item);
 	}
 
 }
