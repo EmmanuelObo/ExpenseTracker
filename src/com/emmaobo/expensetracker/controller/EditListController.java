@@ -39,17 +39,17 @@ public class EditListController {
 		return "edit-list";
 	}
 	
-	@RequestMapping(value="/add-item", method=RequestMethod.POST)
-	public String gotoAddedItemListView(Item item, HttpServletRequest request, Model model)
-	{
-		ExpenseList list = (ExpenseList)request.getServletContext().getAttribute("list");
-		 ApplicationContext context = (ApplicationContext)request.getServletContext().getAttribute("context");
-		AddItemCommand addItemCmd = new AddItemCommand((EntityManagerFactory)context.getBean("emf"), item, list);
-		model.addAttribute("item", new Item());
-		
-		addItemCmd.execute();
-		return "edit-list";
-	}
+//	@RequestMapping(value="/add-item", method=RequestMethod.POST)
+//	public String gotoAddedItemListView(Item item, HttpServletRequest request, Model model)
+//	{
+//		ExpenseList list = (ExpenseList)request.getServletContext().getAttribute("list");
+//		 ApplicationContext context = (ApplicationContext)request.getServletContext().getAttribute("context");
+//		AddItemCommand addItemCmd = new AddItemCommand((EntityManagerFactory)context.getBean("emf"), item, list);
+//		model.addAttribute("item", new Item());
+//		
+//		addItemCmd.execute();
+//		return "edit-list";
+//	}
 	
 	@RequestMapping(value="/remove-item", method=RequestMethod.POST)
 	public String gotoRemoveItemListView(@RequestParam(name="itemId") Long itemID, 

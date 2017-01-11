@@ -9,25 +9,25 @@
 <html>
 <head>
 <script src="js/jquery.js"></script>
-<script src="js/edit-list.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Edit List</title>
 </head>
 <body>
 <h1> ${list.title}</h1>
 
-<sf:form action="add-item" method="POST" modelAttribute="item" id="edit-list-form">
-<label>Name: </label><sf:input type="text" placeholder="Item Name" name="item-name" path="ItemName" id="item-name" />
-<label>Cost: </label><sf:input type="number" step=".01" name="item-cost" style="width: 50px" path="Cost" id="item-cost"/>
-<label>Note: </label><sf:input type="note" name="item-note" path="note" id="item-note" />
+<form action="add-item" method="POST" id="edit-list-form">
+<label>Name: </label><input type="text" placeholder="Item Name" name="item-name" id="item-name" />
+<label>Cost: </label><input type="number" step=".01" name="item-cost" style="width: 50px" id="item-cost"/>
+<label>Note: </label><input type="text" name="item-note" id="item-note" />
 <label>Priority: </label>
-<sf:select path="Priority">
+<select id="item-priority">
 <option value="HIGH">HIGH</option>
 <option value="MEDIUM">MEDIUM</option>
 <option value="LOW">LOW</option>
-</sf:select>
+</select>
 <input type="Submit" value="Add Item">
-</sf:form>
+</form>
 
 
 <div class="list-items-container">
@@ -43,8 +43,14 @@
 <hr>
 </c:forEach>
 
+<div id="user-list-items"></div>
+
 <p>Total: $${list.total }</p>
 </div>
+
+
+<script src="js/manage-items.js"></script>
+<script src="js/items-ajax.js"></script>
 
 </body>
 </html>

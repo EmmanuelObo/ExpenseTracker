@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import com.emmaobo.expensetracker.enumeration.Priority;
 import com.emmaobo.expensetracker.enumeration.Status;
+import com.emmaobo.expensetracker.jsonview.View;
+import com.fasterxml.jackson.annotation.JsonView;
 
 
 @Entity
@@ -24,15 +26,19 @@ public class Item implements Comparable<Item>
 	@Id @GeneratedValue
 	private Long id;
 	
+	@JsonView(View.Public.class)
 	@Column(name="ITEM_NAME")
 	private String itemName;
 	
+	@JsonView(View.Public.class)
 	@Column(name="NOTE")
 	private String note;
 	
+	@JsonView(View.Public.class)
 	@Column(name="COST")
 	private BigDecimal cost;
 	
+	@JsonView(View.Public.class)
 	@Column(name="PRIORITY")
 	@Enumerated(EnumType.STRING)
 	private Priority priority;
